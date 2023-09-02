@@ -33,9 +33,37 @@ const App = () => {
     { name: 'Tirupati', country: 'India' },
     ]
     
+    let indian = cityList.filter((city, indx)=>{
+      if(city.country==='India'){
+        return city;
+      }
+    })
+  
+    for(let i = 0; i<indian.length; i++){
+      for(let j = 0; j<cityList.length; j++){
+        if(indian[i].name===cityList[j].name){
+          cityList.splice(j, 1)
+        }
+      }
+    }
+  
+    cityList.unshift(...indian)
+  
+    console.log(indian);
+    console.log("all", cityList);
+  
   return (
     <div id="main">
                {/* Do not remove the main div */}
+               <ol>
+        {
+          cityList.map((city, indx)=>(
+            <li key={`location${indx+1}`}>
+              {city.name}
+            </li>
+          ))
+        }
+      </ol>
     </div>
   )
 }
